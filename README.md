@@ -350,17 +350,6 @@ All error responses follow a consistent JSON structure — no raw stack traces a
 }
 ```
 
-| Exception Class | HTTP Status | Trigger Scenario |
-|---|---|---|
-| `RoomNotEmptyException` | 409 Conflict | Deleting a room that still has sensors assigned |
-| `LinkedResourceNotFoundException` | 422 Unprocessable Entity | POSTing a sensor with a non-existent `roomId` |
-| `SensorUnavailableException` | 403 Forbidden | POSTing a reading to a MAINTENANCE sensor |
-| `NotFoundException` (JAX-RS built-in) | 404 Not Found | Requesting a resource ID that does not exist |
-| `BadRequestException` (JAX-RS built-in) | 400 Bad Request | Missing or blank required fields |
-| `Throwable` (catch-all) | 500 Internal Server Error | Any unexpected runtime exception |
-
----
-
 ## Conceptual Report — Question Answers
 
 ---
