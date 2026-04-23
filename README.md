@@ -5,18 +5,6 @@ Developed as part of the **5COSC022W Client-Server Architectures** module at the
 
 ---
 
-## Table of Contents
-
-- [API Design Overview](#api-design-overview)
-- [Project Structure](#project-structure)
-- [Technology Stack](#technology-stack)
-- [Building and Running the Server](#building-and-running-the-server)
-- [API Endpoints Reference](#api-endpoints-reference)
-- [Sample curl Commands](#sample-curl-commands)
-- [Error Handling Strategy](#error-handling-strategy)
-- [Conceptual Report — Question Answers](#conceptual-report--question-answers)
-
----
 
 ## API Design Overview
 
