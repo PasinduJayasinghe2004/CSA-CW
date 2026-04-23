@@ -140,43 +140,7 @@ http://localhost:8080/SmartCampusAPI/api/v1
 
 ---
 
-## API Endpoints Reference
 
-### Discovery
-
-| Method | Path | Description | Status |
-|---|---|---|---|
-| GET | `/api/v1` | API metadata and HATEOAS navigation links | 200 |
-
-### Rooms
-
-| Method | Path | Description | Status |
-|---|---|---|---|
-| GET | `/api/v1/rooms` | List all rooms | 200 |
-| POST | `/api/v1/rooms` | Create a new room | 201 |
-| GET | `/api/v1/rooms/{roomId}` | Get a specific room | 200 |
-| DELETE | `/api/v1/rooms/{roomId}` | Delete a room (fails if sensors assigned) | 204 |
-
-### Sensors
-
-| Method | Path | Description | Status |
-|---|---|---|---|
-| GET | `/api/v1/sensors` | List all sensors | 200 |
-| GET | `/api/v1/sensors?type=CO2` | Filter sensors by type | 200 |
-| POST | `/api/v1/sensors` | Register a sensor (validates roomId) | 201 |
-| GET | `/api/v1/sensors/{sensorId}` | Get a specific sensor | 200 |
-| PUT | `/api/v1/sensors/{sensorId}` | Update sensor fields | 200 |
-| DELETE | `/api/v1/sensors/{sensorId}` | Delete a sensor | 204 |
-
-### Sensor Readings (Sub-Resource)
-
-| Method | Path | Description | Status |
-|---|---|---|---|
-| GET | `/api/v1/sensors/{sensorId}/readings` | List all readings for a sensor | 200 |
-| POST | `/api/v1/sensors/{sensorId}/readings` | Add a new reading (blocked if MAINTENANCE) | 201 |
-| GET | `/api/v1/sensors/{sensorId}/readings/{readingId}` | Get a specific reading | 200 |
-
----
 
 ## Sample curl Commands
 
