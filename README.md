@@ -91,7 +91,7 @@ SmartCampusAPI/
 
 - Java 11 or higher
 - Apache Maven 3.6+
-- Apache Tomcat 10.x — [Download here](https://tomcat.apache.org/download-10.cgi)
+- Apache Tomcat 10.x 
 
 ### Step 1 — Clone the Repository
 
