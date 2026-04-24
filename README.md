@@ -151,23 +151,7 @@ curl -X GET http://localhost:8080/SmartCampusAPI/api/v1 \
   -H "Accept: application/json"
 ```
 
-**Response (200 OK):**
-```json
-{
-  "api": "Smart Campus Sensor & Room Management API",
-  "version": "1.0.0",
-  "contact": "admin@smartcampus.ac.uk",
-  "resources": {
-    "rooms":   "/SmartCampusAPI/api/v1/rooms",
-    "sensors": "/SmartCampusAPI/api/v1/sensors"
-  },
-  "_links": {
-    "self":    "/SmartCampusAPI/api/v1/",
-    "rooms":   "/SmartCampusAPI/api/v1/rooms",
-    "sensors": "/SmartCampusAPI/api/v1/sensors"
-  }
-}
-```
+
 
 ### 2. Create a New Room
 
@@ -177,15 +161,7 @@ curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/rooms \
   -d '{"id": "SCI-201", "name": "Science Lab B", "capacity": 25}'
 ```
 
-**Response (201 Created):**
-```json
-{
-  "id": "SCI-201",
-  "name": "Science Lab B",
-  "capacity": 25,
-  "sensorIds": []
-}
-```
+
 
 ### 3. Register a New Sensor (with roomId validation)
 
@@ -195,16 +171,7 @@ curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/sensors \
   -d '{"id": "CO2-002", "type": "CO2", "status": "ACTIVE", "currentValue": 400.0, "roomId": "LIB-301"}'
 ```
 
-**Response (201 Created):**
-```json
-{
-  "id": "CO2-002",
-  "type": "CO2",
-  "status": "ACTIVE",
-  "currentValue": 400.0,
-  "roomId": "LIB-301"
-}
-```
+
 
 ### 4. Filter Sensors by Type
 
@@ -213,18 +180,7 @@ curl -X GET "http://localhost:8080/SmartCampusAPI/api/v1/sensors?type=CO2" \
   -H "Accept: application/json"
 ```
 
-**Response (200 OK):**
-```json
-[
-  {
-    "id": "CO2-001",
-    "type": "CO2",
-    "status": "ACTIVE",
-    "currentValue": 450.0,
-    "roomId": "LAB-102"
-  }
-]
-```
+
 
 ### 5. Add a Sensor Reading (updates currentValue on parent sensor)
 
@@ -234,31 +190,12 @@ curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/sensors/TEMP-001/readin
   -d '{"value": 24.3}'
 ```
 
-**Response (201 Created):**
-```json
-{
-  "id": "a3f1c2d4-...",
-  "timestamp": 1714000000000,
-  "value": 24.3
-}
-```
+
 
 ### 6. Attempt to Delete a Room with Active Sensors — 409 Conflict
 
 ```bash
 curl -X DELETE http://localhost:8080/SmartCampusAPI/api/v1/rooms/LIB-301
-```
-
-**Response (409 Conflict):**
-```json
-{
-  "status": 409,
-  "error": "ROOM_NOT_EMPTY",
-  "message": "Room 'LIB-301' cannot be deleted — it still has 1 sensor(s) assigned to it.",
-  "roomId": "LIB-301",
-  "activeSensors": 1,
-  "hint": "Delete or reassign all sensors before removing this room."
-}
 ```
 
 ### 7. Post a Reading to a MAINTENANCE Sensor — 403 Forbidden
@@ -269,17 +206,6 @@ curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/sensors/OCC-001/reading
   -d '{"value": 15.0}'
 ```
 
-**Response (403 Forbidden):**
-```json
-{
-  "status": 403,
-  "error": "SENSOR_UNAVAILABLE",
-  "message": "Sensor 'OCC-001' is in MAINTENANCE and cannot accept readings.",
-  "sensorId": "OCC-001",
-  "hint": "Set the sensor status to ACTIVE via PUT /api/v1/sensors/{sensorId}."
-}
-```
-
 ### 8. Register a Sensor with a Non-Existent roomId — 422 Unprocessable Entity
 
 ```bash
@@ -287,19 +213,6 @@ curl -X POST http://localhost:8080/SmartCampusAPI/api/v1/sensors \
   -H "Content-Type: application/json" \
   -d '{"type": "Temperature", "status": "ACTIVE", "currentValue": 0.0, "roomId": "FAKE-999"}'
 ```
-
-**Response (422 Unprocessable Entity):**
-```json
-{
-  "status": 422,
-  "error": "UNPROCESSABLE_ENTITY",
-  "message": "Referenced resource with ID 'FAKE-999' does not exist.",
-  "referencedId": "FAKE-999",
-  "hint": "Create the referenced room first, then register the sensor."
-}
-```
-
----
 
 ## Error Handling Strategy
 
